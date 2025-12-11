@@ -1,0 +1,9 @@
+#Database Connection Details
+POSTGRES_USER=progres
+POSTGRES_PASSWORD=@Smanga1234
+POSTGRES_DB_DEV=iec_raw
+
+# Postgres Host (Localhost for local tools, 'db' for container networking)
+POSTGRES_HOST=localhost
+POSTGRES_HOST_CONTAINER=db
+POSTGRES_PORT=5432

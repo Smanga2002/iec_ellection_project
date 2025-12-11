@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+ # PostgreSQL Database Service
+ db:
+  image: postgres:18.1
+  container_name: iec_db
+  restart: always
+  environment:
+   POSTGRES_USER: ${POSTGRES_USER}
+   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+   POSTGRES_DB: ${POSTGRES_DB}
+  ports:
+    - 5432:5432
+  volumes:
+    - ./data:/var/lib/postgresql/18/main
+ # Python Environment with Notebook Services
+ notebooks:
+  build: .
+  container_name: iec_test_notebook
+  ports:
+    - "8888:8888"
+  volumes:
+    - ./notebooks:/Users/SmangalisoOageneg/Projects/iec_ellection_project/notebooks
+    - ./scripts:/Users/SmangalisoOageneg/Projects/iec_ellection_project/scripts
+    - ./config:/Users/SmangalisoOageneg/Projects/iec_ellection_project/config
+  environment:
+   # Pass database credentials to the python container
+   POSTGRES_HOST: db #the service name
+   POSTGRES_PORT: 5432
+   POSTGRES_USER: ${POSTGRES_USER}
+   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+   POSTGRES_DB: ${POSTGRES_DB}
+  depends_on:
+   - db #This is very important so that db starts before the notebook environment
+
+#This is so that the docker compose down doesn't delete all your data when executed
+volumes:
+  data: 
+ 
