@@ -1,11 +1,13 @@
 import os
+import urllib.parse
 from sqlalchemy import create_engine, text
 
 #Get connection details from environment variables
 USER = os.environ.get("POSTGRES_USER")
-PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-HOST = os.environ.get("POSTGRES_HOST_CONTAINER")
-DB = os.environ.get("POSTGRES_DB_DEV")
+RAW_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+PASSWORD = urllib.parse.quote_plus(RAW_PASSWORD)  # ENCODE SPECIAL CHARACTERS
+HOST = os.environ.get("POSTGRES_HOST")
+DB = os.environ.get("POSTGRES_DB")
 PORT = os.environ.get("POSTGRES_PORT")
 
 def test_db_connection():

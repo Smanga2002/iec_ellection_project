@@ -23,6 +23,7 @@ services:
     - ./notebooks:/Users/SmangalisoOageneg/Projects/iec_ellection_project/notebooks
     - ./scripts:/Users/SmangalisoOageneg/Projects/iec_ellection_project/scripts
     - ./config:/Users/SmangalisoOageneg/Projects/iec_ellection_project/config
+    - ./data:/Users/SmangalisoOageneg/Projects/iec_ellection_project/data
   environment:
    # Pass database credentials to the python container
    POSTGRES_HOST: db #the service name
